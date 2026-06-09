@@ -60,6 +60,22 @@
   .cta:hover{background:var(--teal-glow);box-shadow:0 14px 40px rgba(0,151,178,.35);transform:translateY(-2px)}
   .cta .arrow{transition:.35s}.cta:hover .arrow{transform:translateX(6px)}
   .deposit{text-align:center;margin-top:14px;font-size:.82rem;color:var(--sand-dim);font-style:italic;font-family:'Fraunces'}
+  /* inquiry form */
+  .inquire h2{font-family:'Fraunces';font-weight:300;font-size:2.2rem;line-height:1.1;letter-spacing:-.01em;margin-bottom:8px}
+  .inquire h2 em{font-style:italic;color:var(--teal-glow)}
+  .inquire .sub{color:var(--sand-dim);max-width:50ch;margin-bottom:30px}
+  .formgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:680px){.formgrid{grid-template-columns:1fr}}
+  .field{display:flex;flex-direction:column;gap:7px}
+  .field.full{grid-column:1/-1}
+  .field label{font-family:'Outfit';font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--sand-dim)}
+  .field input,.field textarea{background:rgba(7,40,48,.55);border:1px solid var(--line);border-radius:3px;padding:14px 16px;color:var(--sand);font-family:'Outfit';font-weight:300;font-size:1rem;transition:.3s}
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--teal-glow);box-shadow:0 0 0 3px rgba(0,151,178,.18)}
+  .field textarea{min-height:110px;resize:vertical}
+  .inquire .cta{margin-top:4px}
+  .micro{margin-top:16px;font-size:.84rem;color:var(--sand-dim);font-style:italic;font-family:'Fraunces';max-width:60ch}
+  .form-ok{display:none;border:1px solid var(--teal);border-radius:4px;padding:30px;background:rgba(0,151,178,.08);font-family:'Fraunces';font-size:1.15rem}
+  .form-err{display:none;margin-top:14px;font-size:.86rem;color:var(--rust-warm)}
   .dd-eyebrow{font-family:'Outfit';font-weight:400;font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--rust-warm);margin-bottom:16px}
   .dd-h{font-family:'Fraunces';font-weight:300;font-size:2.2rem;line-height:1.1;letter-spacing:-.01em;margin-bottom:14px}
   .dd-h em{font-style:italic;color:var(--teal-glow)}
@@ -119,9 +135,45 @@
         <li>Delivered within four weeks</li>
       </ul>
       <div class="price"><span class="n">$2,800</span><span class="lab">flat&nbsp;/&nbsp;per session</span></div>
-      <a class="cta" href="#book">Reserve your session <span class="arrow">&rarr;</span></a>
+      <a class="cta" href="#inquire">Reserve your session <span class="arrow">&rarr;</span></a>
       <p class="deposit">A deposit holds your date.</p>
     </div>
+  </section>
+  <section class="inquire rv" id="inquire">
+    <h2>Reserve a <em>session</em></h2>
+    <p class="sub">Send your details and I'll get back to you with availability, next steps, and a deposit link to hold your date.</p>
+    <form id="inquiry-form" action="https://formsubmit.co/drew@coralandpine.com" method="POST" novalidate>
+      <input type="hidden" name="_subject" value="Session inquiry — coralandpine.com">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+      <div class="formgrid">
+        <div class="field">
+          <label for="f-name">Name *</label>
+          <input id="f-name" name="Name" type="text" required autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="f-email">Email *</label>
+          <input id="f-email" name="Email" type="email" required autocomplete="email">
+        </div>
+        <div class="field">
+          <label for="f-phone">Phone *</label>
+          <input id="f-phone" name="Phone" type="tel" required autocomplete="tel">
+        </div>
+        <div class="field">
+          <label for="f-dates">Requested dates — primary &amp; backup *</label>
+          <input id="f-dates" name="Requested dates (primary and backup)" type="text" placeholder="e.g. Aug 9, backup Aug 16" required>
+        </div>
+        <div class="field full">
+          <label for="f-vision">What you're looking for</label>
+          <textarea id="f-vision" name="What you're looking for" placeholder="Your idea, occasion, experience in the water — anything useful."></textarea>
+        </div>
+      </div>
+      <a class="cta" href="#" role="button" id="submit-btn">Request your session <span class="arrow">&rarr;</span></a>
+      <p class="form-err" id="form-err">Something went wrong sending the form — please try again, or email me directly at drew@coralandpine.com.</p>
+      <p class="micro">A deposit holds your date. I'll reply with availability, next steps, and a deposit link.</p>
+    </form>
+    <div class="form-ok" id="form-ok">Thanks — your request is in. I'll get back to you soon with availability and next steps.</div>
   </section>
   <section class="dd rv">
     <p class="dd-eyebrow">Also from Coral and Pine</p>
@@ -141,6 +193,32 @@
 <script>
   const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.18});
   document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+  // Inquiry form — AJAX submit so the visitor stays on the page (no mail client, no redirect)
+  const form=document.getElementById('inquiry-form');
+  const btn=document.getElementById('submit-btn');
+  btn.addEventListener('click',async(e)=>{
+    e.preventDefault();
+    if(!form.checkValidity()){form.reportValidity();return}
+    btn.style.opacity=.6;btn.style.pointerEvents='none';
+    try{
+      const res=await fetch('https://formsubmit.co/ajax/drew@coralandpine.com',{
+        method:'POST',headers:{'Accept':'application/json'},body:new FormData(form)
+      });
+      let data={};try{data=await res.json()}catch(_){}
+      const msg=(data.message||'').toLowerCase();
+      if(!res.ok && !msg.includes('activat') && !msg.includes('confirm')) throw new Error(data.message||('HTTP '+res.status));
+      form.style.display='none';
+      const ok=document.getElementById('form-ok');
+      ok.style.display='block';
+      ok.scrollIntoView({behavior:'smooth',block:'center'});
+    }catch(err){
+      const el=document.getElementById('form-err');
+      el.textContent='Something went wrong sending the form'+(err&&err.message?' ('+err.message+')':'')+' — please try again, or email me directly at drew@coralandpine.com.';
+      el.style.display='block';
+      btn.style.opacity=1;btn.style.pointerEvents='auto';
+    }
+  });
 </script>
 </body>
 </html>
