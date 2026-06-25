@@ -93,6 +93,39 @@
   @keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
   .rv{opacity:0;transform:translateY(30px);transition:opacity .9s,transform .9s}
   .rv.in{opacity:1;transform:none}
+  /* mailing list signup */
+  .signup .ml-form-embedContainer{max-width:560px}
+  .signup .ml-form-align-center{text-align:left}
+  .signup .sg-h{font-family:'Fraunces';font-weight:300;font-size:2rem;line-height:1.1;letter-spacing:-.01em;margin-bottom:12px}
+  .signup .sg-body{color:var(--sand-dim);max-width:48ch;margin:0 0 28px;font-size:1rem}
+  .signup form{display:flex;flex-wrap:wrap;gap:16px;align-items:stretch;margin:0;width:100%}
+  .signup .ml-form-interestGroupsRow{flex:0 0 100%;display:block;margin:0}
+  .signup .sg-prompt{font-family:'Outfit';font-weight:400;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--sand-dim);margin:0 0 14px}
+  .signup .ml-form-interestGroupsRowCheckbox{display:inline-block;margin:0 24px 10px 0}
+  .signup .ml-form-interestGroupsRowCheckbox label{display:flex;align-items:center;gap:10px;cursor:pointer;margin:0}
+  .signup .ml-form-interestGroupsRowCheckbox input[type=checkbox]{appearance:none;-webkit-appearance:none;width:18px;height:18px;flex:0 0 auto;border:1px solid var(--line);border-radius:3px;background:rgba(7,40,48,.55);cursor:pointer;position:relative;transition:.25s}
+  .signup .ml-form-interestGroupsRowCheckbox input[type=checkbox]:checked{background:var(--teal);border-color:var(--teal)}
+  .signup .ml-form-interestGroupsRowCheckbox input[type=checkbox]:checked::after{content:"";position:absolute;left:5px;top:1px;width:5px;height:10px;border:solid var(--abyss);border-width:0 2px 2px 0;transform:rotate(45deg)}
+  .signup .ml-form-interestGroupsRowCheckbox input[type=checkbox]:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(0,151,178,.18)}
+  .signup .ml-form-interestGroupsRowCheckbox .label-description{font-family:'Outfit';font-weight:300;font-size:.98rem;color:var(--sand)}
+  .signup .ml-form-formContent{flex:1 1 240px;margin:0;min-width:0}
+  .signup .ml-form-fieldRow,.signup .ml-field-group{margin:0}
+  .signup input[type=email]{width:100%;background:rgba(7,40,48,.55);border:1px solid var(--line);border-radius:3px;padding:15px 16px;color:var(--sand);font-family:'Outfit';font-weight:300;font-size:1rem;transition:.3s}
+  .signup input[type=email]:focus{outline:none;border-color:var(--teal-glow);box-shadow:0 0 0 3px rgba(0,151,178,.18)}
+  .signup input[type=email]::placeholder{color:var(--sand-dim)}
+  .signup .ml-form-embedSubmit{flex:0 0 auto;margin:0;display:flex}
+  .signup .ml-form-embedSubmit button.primary{display:inline-flex;align-items:center;gap:10px;background:transparent;border:1px solid var(--teal);color:var(--teal-glow);border-radius:3px;padding:0 28px;font-family:'Outfit';font-weight:500;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:.35s;white-space:nowrap}
+  .signup .ml-form-embedSubmit button.primary:hover{background:var(--teal);color:var(--abyss)}
+  .signup .ml-form-embedSubmit button.primary .arrow{transition:.35s}
+  .signup .ml-form-embedSubmit button.primary:hover .arrow{transform:translateX(5px)}
+  .signup .ml-form-embedSubmit button.loading{display:none;align-items:center;justify-content:center;background:var(--teal);border:1px solid var(--teal);border-radius:3px;padding:0 28px;cursor:default}
+  .signup .ml-form-embedSubmitLoad{display:inline-block;width:18px;height:18px;border:3px solid rgba(4,24,29,.35);border-top-color:var(--abyss);border-radius:50%;animation:sg-spin 1s linear infinite}
+  .signup .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+  @keyframes sg-spin{to{transform:rotate(360deg)}}
+  .signup .ml-error input[type=email]{border-color:var(--rust-warm)}
+  .signup .ml-error .label-description{color:var(--rust-warm)}
+  .signup .ml-form-successBody{padding:0}
+  @media(max-width:680px){.signup .ml-form-embedSubmit,.signup .ml-form-embedSubmit button.primary{width:100%;justify-content:center}}
 </style>
 </head>
 <body>
@@ -181,6 +214,65 @@
     <p class="dd-p">Private underwater mermaid film &amp; photography in a prehistoric Florida spring, in collaboration with Nixi Aquatics.</p>
     <a class="dd-link" href="/devilsden">Devil's Den mermaid sessions <span class="arrow">&rarr;</span></a>
   </section>
+  <section class="signup rv">
+    <div id="mlb2-43053117" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-43053117">
+      <div class="ml-form-align-center">
+        <div class="ml-form-embedWrapper embedForm">
+          <div class="ml-form-embedBody ml-form-embedBodyDefault row-form">
+            <div class="ml-form-embedContent">
+              <h3 class="sg-h">Dates before anyone else</h3>
+              <p class="sg-body">New session dates and trips open to this list first. Choose what you'd like to hear about, and you'll get first chance to book before it's announced anywhere else.</p>
+            </div>
+            <form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/2432254/forms/191265215592007540/subscribe" data-code="" method="post" target="_blank">
+              <div class="ml-form-interestGroupsRow ml-block-groups ml-validate-required">
+                <p class="sg-prompt">Which would you like to hear about?</p>
+                <div class="ml-form-interestGroupsRowCheckbox group">
+                  <label>
+                    <input type="checkbox" name="groups[]" value="191265097878865157">
+                    <div class="label-description">Pool</div>
+                  </label>
+                </div>
+                <div class="ml-form-interestGroupsRowCheckbox group">
+                  <label>
+                    <input type="checkbox" name="groups[]" value="191265124488578267">
+                    <div class="label-description">Florida Springs / Devil's Den</div>
+                  </label>
+                </div>
+                <div class="ml-form-interestGroupsRowCheckbox last-group">
+                  <label>
+                    <input type="checkbox" name="groups[]" value="191265133259916460">
+                    <div class="label-description">Travel</div>
+                  </label>
+                </div>
+              </div>
+              <div class="ml-form-formContent">
+                <div class="ml-form-fieldRow ml-last-item">
+                  <div class="ml-field-group ml-field-email ml-validate-email ml-validate-required">
+                    <input aria-label="email" aria-required="true" type="email" class="form-control" name="fields[email]" placeholder="Your email" autocomplete="email">
+                  </div>
+                </div>
+              </div>
+              <input type="hidden" name="ml-submit" value="1">
+              <div class="ml-form-embedSubmit">
+                <button type="submit" class="primary">Join the list <span class="arrow">&rarr;</span></button>
+                <button disabled="disabled" style="display: none;" type="button" class="loading">
+                  <div class="ml-form-embedSubmitLoad"></div>
+                  <span class="sr-only">Loading...</span>
+                </button>
+              </div>
+              <input type="hidden" name="anticsrf" value="true">
+            </form>
+          </div>
+          <div class="ml-form-successBody row-success" style="display: none">
+            <div class="ml-form-successContent">
+              <h3 class="sg-h">Thank you</h3>
+              <p class="sg-body">You're on the list — you'll hear about new dates here first.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
   <div class="trust rv" id="book">
     <p class="note">Underwater work featured by <a href="https://www.facebook.com/share/v/1CcDwsykL8/" target="_blank" rel="noopener"><b>Nikon USA</b></a>, <a href="https://www.ikelite.com/blogs/customer-photos/featured-customers-drew-stuckey-coral-and-pine" target="_blank" rel="noopener"><b>Ikelite</b></a>, and <a href="https://www.instagram.com/p/DUgE1BbkoM3/" target="_blank" rel="noopener"><b>Thistle &amp; Spire</b></a> &middot; shared by <b>RED Digital Cinema</b> and <b>Nauticam</b> &middot; freedive- and SCUBA-certified &middot; shot on RED with Nauticam housings.</p>
   </div>
@@ -220,5 +312,13 @@
     }
   });
 </script>
+<script>
+  function ml_webform_success_43053117() {
+    var $ = ml_jQuery || jQuery;
+    $('.ml-subscribe-form-43053117 .row-success').show();
+    $('.ml-subscribe-form-43053117 .row-form').hide();
+  }
+</script>
+<script src="https://groot.mailerlite.com/js/w/webforms.min.js?v83147fa8ce2d95cb73ece7f28b469519" type="text/javascript"></script>
 </body>
 </html>
